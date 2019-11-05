@@ -11,5 +11,6 @@
 <style lang="scss">
   select{
     border: none;
+    appearance: none;
   }
 </style>

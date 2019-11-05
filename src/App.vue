@@ -19,18 +19,16 @@ export default {
   name: 'app',
   data() {
     return {
-      events: [
-        { id: 1, title: 'add milk', completed: false },
-        { id: 2, title: 'add apples', completed: false },
-        { id: 3, title: 'add bread', completed: false },
-      ],
+      events: [],
     };
   },
-  mounted() {
-    fetch('http://5db050f78087400014d37dc5.mockapi.io/api/users/8/events')
-      .then(response => response.json())
-      .then((json) => {
-        this.events = json;
+  created() {
+    this.$http.get('http://5db050f78087400014d37dc5.mockapi.io/api/users/8/events')
+      .then((response) => {
+        this.events = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
       });
   },
   components: {
