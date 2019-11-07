@@ -1,5 +1,5 @@
 <template>
-  <li class="event-list--item">
+  <li class="event-list--item" @click="viewDetailsEvent">
     <div class="event-list--title">{{ event.title }}</div>
     <div class="event-list--description"><p>{{ event.description }}</p></div>
     <div class="event-list--counters">
@@ -16,6 +16,12 @@ export default {
     event: {
       type: Object,
       required: true,
+    },
+    viewDetails: Function,
+  },
+  methods: {
+    viewDetailsEvent() {
+      this.viewDetails(this.event.id);
     },
   },
 };
