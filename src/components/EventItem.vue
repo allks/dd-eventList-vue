@@ -33,7 +33,7 @@ export default {
       display: flex;
       flex-direction: column;
       position: relative;
-      margin: 0 auto 40px;
+      margin-bottom: 40px;
       width: 100%;
       min-height: 212px;
       border-radius: 10px;
@@ -66,6 +66,26 @@ export default {
       font-size: 12px;
       margin: 20px;
       color: #FF2F2F;
+    }
+  }
+
+  @media screen and (max-width: 760px) {
+    .event-list{
+      &--title{
+        font-size: 18px;
+      }
+      &--counters{
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+      }
+      &--comments{
+        margin: 5px 0 0 0;
+      }
+      &--remove{
+        position: static;
+        margin-top: 0;
+      }
     }
   }
 </style>
