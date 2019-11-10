@@ -34,7 +34,8 @@
           class="event-form--input event-form--input__date"
           id="date"
           placeholder="01.07.1970"
-          v-model="event.data">
+          v-model="event.dete"
+        >
       </div>
       <button
         class="event-form--submit"
@@ -44,7 +45,6 @@
 </template>
 
 <script>
-import EventService from '../EventService';
 
 export default {
   data() {
@@ -54,8 +54,13 @@ export default {
   },
   methods: {
     addEvent() {
-      EventService.addEvent(this.event.title, this.event.description, this.event.data);
-      this.$router.push('/');
+      this.$http.post('http://5db050f78087400014d37dc5.mockapi.io/api/users/8/events/', this.event)
+        .then(() => {
+          this.$router.push('/');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };

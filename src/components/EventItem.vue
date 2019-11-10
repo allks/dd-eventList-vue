@@ -3,19 +3,20 @@
     <div class="event-list--title">{{ event.title }}</div>
     <div class="event-list--description"><p>{{ event.description }}</p></div>
     <div class="event-list--counters">
-      <div class="event-list--date">Дата публикации: {{ event.data }}</div>
+      <div class="event-list--date">Дата публикации: {{ event.dete | moment }}</div>
       <!-- <div class="event-list--comments">Комментарии: {{ event.comments.length || 0 }}</div> -->
     </div>
     <div class="event-list--btns">
       <div class="event-list--view-details"
         @click="viewDetailsEvent">Подробнее</div>
-      <div class="event-list--remove">Удалить</div>
+      <div class="event-list--remove"
+        @click="deleteEvent(event)">Удалить</div>
     </div>
   </li>
 </template>
 
 <script>
-// import EventService from '../EventService';
+import moment from 'moment';
 
 export default {
   props: {
@@ -24,9 +25,23 @@ export default {
       required: true,
     },
   },
+  filters: {
+    moment(dete) {
+      return moment(dete).format('DD.MM.YYYY');
+    },
+  },
   methods: {
     viewDetailsEvent() {
       this.$router.push({ name: 'details', params: { id: this.event.id } });
+    },
+    deleteEvent(event, id) {
+      this.$http.deleteEvent(`http://5db050f78087400014d37dc5.mockapi.io/api/users/8/events/${id}`)
+        .then(() => {
+          this.event.splice(id, 1);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };

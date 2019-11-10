@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import EventService from '../EventService';
+// import EventService from '../EventService';
 
 export default {
   data() {
@@ -14,13 +14,19 @@ export default {
       event: {},
     };
   },
-  created() {
-    EventService.$on('viewDetails', (selectedEvent) => {
-      this.event = selectedEvent;
-    });
-  },
   mounted() {
-    EventService.viewDetails(this.$route.params.id);
+    this.loadEvent(this.$route.params.id);
+  },
+  methods: {
+    loadEvent(id) {
+      this.$http.get(`http://5db050f78087400014d37dc5.mockapi.io/api/users/8/events/${id}`)
+        .then((response) => {
+          this.event = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>

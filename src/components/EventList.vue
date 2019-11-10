@@ -16,7 +16,6 @@
 
 <script>
 import EventItem from '@/components/EventItem.vue';
-import EventService from '../EventService';
 
 export default {
   data() {
@@ -28,7 +27,13 @@ export default {
     EventItem,
   },
   created() {
-    this.events = EventService.events;
+    this.$http.get('http://5db050f78087400014d37dc5.mockapi.io/api/users/8/events/')
+      .then((response) => {
+        this.events = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 
