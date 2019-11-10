@@ -4,10 +4,7 @@
       <router-link to="/add" class="add-event">+ Добавить событие</router-link>
       <router-link to="/add" class="add-event">Сортировать по:</router-link>
     </div>
-    <ul class="event-list"
-      :events="events"
-      :event="selectedEvent"
-      @viewDetails="viewDetails">
+    <ul class="event-list">
       <EventItem
         v-for="event in events"
         :key="event.id"
@@ -18,36 +15,23 @@
 </template>
 
 <script>
-import _ from 'lodash';
 import EventItem from '@/components/EventItem.vue';
+import EventService from '../EventService';
 
 export default {
   data() {
     return {
       events: [],
-      selectedEvent: [],
-      mode: 'view',
     };
-  },
-  created() {
-    this.$http.get('http://5db050f78087400014d37dc5.mockapi.io/api/users/8/events')
-      .then((response) => {
-        this.events = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   },
   components: {
     EventItem,
   },
-  methods: {
-    viewDetails(id) {
-      const eventToView = _.find(this.events, { id });
-      this.$emit('viewDetails', eventToView);
-    },
+  created() {
+    this.events = EventService.events;
   },
 };
+
 </script>
 
 <style lang="scss">

@@ -1,27 +1,32 @@
 <template>
-  <li class="event-list--item" @click="viewDetailsEvent">
+  <li class="event-list--item">
     <div class="event-list--title">{{ event.title }}</div>
     <div class="event-list--description"><p>{{ event.description }}</p></div>
     <div class="event-list--counters">
-      <div class="event-list--date">Дата публикации: {{ event.dete }}</div>
-      <div class="event-list--comments">Комментарии: {{ event.comments.length }}</div>
+      <div class="event-list--date">Дата публикации: {{ event.data }}</div>
+      <!-- <div class="event-list--comments">Комментарии: {{ event.comments.length || 0 }}</div> -->
     </div>
-    <div class="event-list--remove">Удалить</div>
+    <div class="event-list--btns">
+      <div class="event-list--view-details"
+        @click="viewDetailsEvent">Подробнее</div>
+      <div class="event-list--remove">Удалить</div>
+    </div>
   </li>
 </template>
 
 <script>
+// import EventService from '../EventService';
+
 export default {
   props: {
     event: {
       type: Object,
       required: true,
     },
-    viewDetails: Function,
   },
   methods: {
     viewDetailsEvent() {
-      this.viewDetails(this.event.id);
+      this.$router.push({ name: 'details', params: { id: this.event.id } });
     },
   },
 };
@@ -32,7 +37,6 @@ export default {
     &--item {
       display: flex;
       flex-direction: column;
-      position: relative;
       margin-bottom: 40px;
       width: 100%;
       min-height: 212px;
@@ -59,13 +63,31 @@ export default {
       margin-left: auto;
       color: #ccc;
     }
+    &--btns{
+      display: flex;
+      justify-content: space-around;
+    }
+    &--view-details,
     &--remove{
-      position: absolute;
-      top: 0;
-      right: 0;
-      font-size: 12px;
-      margin: 20px;
-      color: #FF2F2F;
+      width: 150px;
+      height: 35px;
+      line-height: 35px;
+      color: #fff;
+      border-radius: 30px;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    &--view-details{
+      background-color: #4A76A8;
+      &:hover{
+        background-color: darken(#4A76A8, 20%);
+      }
+    }
+    &--remove{
+      background-color: #FF2F2F;
+      &:hover{
+        background-color: darken(#FF2F2F, 20%);
+      }
     }
   }
 

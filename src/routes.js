@@ -16,6 +16,7 @@ export const routes = [
   {
     path: '/details/:id',
     component: EventDetails,
+    name: 'details',
   },
   {
     path: '*',

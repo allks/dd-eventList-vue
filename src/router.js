@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import { routes } from './routers';
+import { routes } from './routes';
 
 Vue.use(VueRouter);
 

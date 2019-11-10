@@ -29,7 +29,7 @@
       &--item{
         width: 160px;
         cursor: pointer;
-        transition-duration: 1s;
+        transition-duration: .7s;
         &:hover{
           background-color: #F0EEEE;
         }
