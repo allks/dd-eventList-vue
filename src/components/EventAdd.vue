@@ -135,6 +135,7 @@ export default {
     margin: 20px;
     margin-left: 0;
     line-height: 24px;
+    text-decoration: none;
     color: #3d3d3d;
     cursor: pointer;
     &:before{

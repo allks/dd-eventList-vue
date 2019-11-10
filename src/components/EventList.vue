@@ -2,7 +2,7 @@
   <main class="maincontent">
     <div class="controls">
       <router-link to="/add" class="add-event">+ Добавить событие</router-link>
-      <router-link to="/add" class="add-event">Сортировать по:</router-link>
+      <router-link to="" class="sort-event">Сортировать по:</router-link>
     </div>
     <ul class="event-list">
       <EventItem
@@ -66,6 +66,17 @@ export default {
       background-color: darken(#19D94F, 10%);
     }
   }
+  .sort-event{
+    width: 295px;
+    height: 50px;
+    border: 1px solid #3d3d3d;
+    border-radius: 30px;
+    line-height: 50px;
+    font-size: 18px;
+    color: #3d3d3d;
+    text-decoration: none;
+    transition-duration: .5s;
+  }
   .controls{
     display: flex;
     justify-content: space-between;
@@ -79,7 +90,8 @@ export default {
     .controls{
       flex-direction: column;
     }
-    .add-event{
+    .add-event,
+    .sort-event{
       width: 80%;
       margin: 10px auto;
     }

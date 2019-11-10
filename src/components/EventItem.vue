@@ -4,7 +4,7 @@
     <div class="event-list--description"><p>{{ event.description }}</p></div>
     <div class="event-list--counters">
       <div class="event-list--date">Дата публикации: {{ event.dete | moment }}</div>
-      <!-- <div class="event-list--comments">Комментарии: {{ event.comments.length || 0 }}</div> -->
+      <div class="event-list--comments">Комментарии: {{ event.comments.length || 0 }}</div>
     </div>
     <div class="event-list--btns">
       <div class="event-list--view-details"
@@ -34,15 +34,6 @@ export default {
     viewDetailsEvent() {
       this.$router.push({ name: 'details', params: { id: this.event.id } });
     },
-    deleteEvent(event, id) {
-      this.$http.deleteEvent(`http://5db050f78087400014d37dc5.mockapi.io/api/users/8/events/${id}`)
-        .then(() => {
-          this.event.splice(id, 1);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
   },
 };
 </script>
@@ -50,6 +41,7 @@ export default {
 <style lang="scss">
   .event-list {
     &--item {
+      position: relative;
       display: flex;
       flex-direction: column;
       margin-bottom: 40px;
@@ -82,8 +74,7 @@ export default {
       display: flex;
       justify-content: space-around;
     }
-    &--view-details,
-    &--remove{
+    &--view-details{
       width: 150px;
       height: 35px;
       line-height: 35px;
@@ -99,9 +90,14 @@ export default {
       }
     }
     &--remove{
-      background-color: #FF2F2F;
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: #FF2F2F;
+      margin: 20px;
+      cursor: pointer;
       &:hover{
-        background-color: darken(#FF2F2F, 20%);
+        color: darken(#FF2F2F, 20%);
       }
     }
   }
@@ -119,9 +115,26 @@ export default {
       &--comments{
         margin: 5px 0 0 0;
       }
+      &--btns{
+        flex-direction: column;
+      }
+      &--view-details,
+      &--remove{
+        margin: 10px auto;
+      }
       &--remove{
         position: static;
-        margin-top: 0;
+        width: 150px;
+        height: 35px;
+        line-height: 35px;
+        background-color: #FF2F2F;
+        color: #fff;
+        border-radius: 30px;
+        margin-bottom: 20px;
+        &:hover{
+          color: #fff;
+          background-color: darken(#FF2F2F, 20%);
+        }
       }
     }
   }
